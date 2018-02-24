@@ -37,25 +37,20 @@ func playerInput(s *State) {
 		fmt.Println("\n*** Please only use alphabetic characters.")
 		return
 	}
-	l = strings.ToLower(l)
-	if len(l) > 2 {
-		fmt.Println("\n*** Too many characters. Only one letter expected.")
-		return
-	}
-	// Remove newline
-	if contains(s.IncorrectLetters, l[0]) {
+	c := strings.ToLower(string(l[0]))
+	if contains(s.IncorrectLetters, byte(c[0])) {
 		fmt.Println("\n*** You already guessed that letter!")
 		return
 	}
-	if !strings.Contains(s.Wordlist[s.Word], string(l[0])) {
+	if !strings.Contains(s.Wordlist[s.Word], c) {
 		// word DOES NOT contain the guessed letter.
-		s.IncorrectLetters = append(s.IncorrectLetters, l[0])
+		s.IncorrectLetters = append(s.IncorrectLetters, byte(c[0]))
 		fmt.Println("\n*** Incorrect!")
 		return
 	} else {
 		// word CONTAINS the guessed letter.
 		for i, a := range s.Wordlist[s.Word] {
-			if a == rune(l[0]) {
+			if a == rune(c[0]) {
 				s.WordState[i] = byte(a)
 			}
 		}
