@@ -1,13 +1,14 @@
 package main
 
 // Go dev tools: https://golang.org/dl/
-// compile using: go build gohangman.go
+// download source using go get github.com/mattweidner/gohangman
+// compile using: go build github.com/mattweidner/gohangman
 import (
 	"bufio"
 	"fmt"
+	"github.com/mattweidner/gohangman/newline"
 	"io"
 	"math/rand"
-	"github.com/mattweidner/gohangman/newline"
 	"os"
 	"strings"
 	"time"
@@ -29,7 +30,7 @@ func drawBoard(s *State) {
 	for _, x := range s.IncorrectLetters {
 		fmt.Print(string(x) + " ")
 	}
-	fmt.Print(newline.STR+newline.STR)
+	fmt.Print(newline.STR + newline.STR)
 	fmt.Print("Guess a letter: ")
 }
 
@@ -122,7 +123,7 @@ func checkWinLoss(s *State) {
 
 func main() {
 	build := 157
-	fmt.Printf("Go Hangman by Matt Weidner Build %d" + newline.STR, build)
+	fmt.Printf("Go Hangman by Matt Weidner Build %d"+newline.STR, build)
 	fmt.Println("Feb. 2018")
 	s := initState()
 	for {
@@ -130,7 +131,7 @@ func main() {
 		playerInput(&s)
 		checkWinLoss(&s)
 		if s.Won || s.Lost {
-			fmt.Printf("Wins: %d\tLosses: %d" + newline.STR, s.Wins, s.Losses)
+			fmt.Printf("Wins: %d\tLosses: %d"+newline.STR, s.Wins, s.Losses)
 			fmt.Print("Play again? (Y/N) ")
 			r := bufio.NewReader(os.Stdin)
 			l, _ := r.ReadString('\n')
@@ -152,4 +153,3 @@ func main() {
 
 	}
 }
-
